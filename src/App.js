@@ -1,10 +1,9 @@
-import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./component/Home/Home";
 import MyPokemon from "./component/MyPokemon/MyPokemon";
 
-const App = () => {
+function App() {
     // list menu item
     let menuItem = [
         {
@@ -35,6 +34,6 @@ const App = () => {
             </Switch>
         </BrowserRouter>
     );
-};
+}
 
 export default App;
