@@ -1,7 +1,7 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Home from "./component/Home/Home";
-import MyPokemon from "./component/MyPokemon/MyPokemon";
+import Home from "./components/Home/Home";
+import MyPokemon from "./components/MyPokemon/MyPokemon";
 
 function App() {
     // list menu item
