@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Home from "./component/Home/Home";
+import MyPokemon from "./component/MyPokemon/MyPokemon";
+
+const App = () => {
+    // list menu item
+    let menuItem = [
+        {
+            name: "Home",
+            route: "/",
+        },
+        {
+            name: "My Pokemon",
+            route: "/my-pokemon",
+        },
+    ];
+
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route
+                    exact
+                    path="/"
+                    children={<Home menuItem={menuItem} active="Home" />}
+                />
+                <Route
+                    exact
+                    path="/my-pokemon"
+                    children={
+                        <MyPokemon menuItem={menuItem} active="My Pokemon" />
+                    }
+                />
+            </Switch>
+        </BrowserRouter>
+    );
+};
 
 export default App;
