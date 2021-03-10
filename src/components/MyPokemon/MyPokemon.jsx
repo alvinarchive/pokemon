@@ -9,7 +9,6 @@ import Header from "../Header/Header";
 const MyPokemon = (props) => {
     let headerCss = {
         backgroundColor: "#E4EBE0",
-        height: "300vh",
         margin: 0,
         zIndex: 3,
     };

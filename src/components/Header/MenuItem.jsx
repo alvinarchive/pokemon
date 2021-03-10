@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import { css, jsx } from "@emotion/react";
+import { jsx } from "@emotion/react";
 import { Link } from "react-router-dom";
 
 const MenuItem = (props) => {
@@ -15,7 +15,6 @@ const MenuItem = (props) => {
         listStyleType: "none",
         whiteSpace: "nowrap",
         borderRadius: "8px",
-        textAlign: "center",
         zIndex: 10,
         transition: "all 0.1s ease-in",
     };
@@ -34,15 +33,8 @@ const MenuItem = (props) => {
         css.fontWeight = 1000;
     }
 
-    console.log(props.menu);
     return (
-        <Link
-            to={props.menu.route}
-            css={linkCss}
-            onClick={() => {
-                console.log("clicked");
-            }}
-        >
+        <Link to={props.menu.route} css={linkCss} onClick={() => {}}>
             <li css={[css, hoverCss]}>{props.menu.name}</li>
         </Link>
     );

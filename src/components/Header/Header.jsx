@@ -1,8 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import React, { useEffect, useState } from "react";
-import { css, jsx, keyframes } from "@emotion/react";
+import { useEffect, useState } from "react";
+import { jsx, keyframes } from "@emotion/react";
 import MenuItem from "./MenuItem";
 
 const Header = (props) => {
@@ -41,7 +41,6 @@ const Header = (props) => {
             width: "5vh",
             height: "5vh",
             display: "block",
-            position: "absolute",
             right: 0,
             opacity: 1,
             position: "fixed",
@@ -77,7 +76,6 @@ const Header = (props) => {
     };
 
     const onMenuClicked = () => {
-        console.log("clicked");
         isMenuOpen ? setMenuOpen(false) : setMenuOpen(true);
     };
 
