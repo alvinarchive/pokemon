@@ -34,6 +34,7 @@ const PokemonDetail = (props) => {
         userSelect: "none",
         backgroundColor: "#E4EBE0",
         color: "#263F60",
+        minHeight: "100vh",
         paddingBottom: "10vh",
     };
 
@@ -96,6 +97,10 @@ const PokemonDetail = (props) => {
                 />
             </div>
         );
+    }
+
+    if (error) {
+        return <div>error</div>;
     }
 
     let cardCss = {
@@ -247,7 +252,6 @@ const PokemonDetail = (props) => {
                             <span>{data.pokemon.weight} lbs</span>
                         </div>
                     </Slide>
-
                     {/* Pokemon Stats */}
                     <Slide bottom>
                         <div css={statsCss}>
@@ -258,8 +262,7 @@ const PokemonDetail = (props) => {
                             })}
                         </div>
                     </Slide>
-
-                    {/* Pokemon Moves */}
+                    Pokemon Moves
                     <Slide bottom>
                         <span css={weightCss}>Moves</span>
                         <div css={headerMoveCss}>
@@ -270,11 +273,14 @@ const PokemonDetail = (props) => {
                             <div css={textCss}>Priority</div>
                         </div>
                     </Slide>
-
                     <Slide bottom>
-                        {data.pokemon.moves.map((item, index) => {
-                            return <PokemonMove move={item} key={index} />;
-                        })}
+                        {data.pokemon.moves.length > 0 ? (
+                            data.pokemon.moves.map((item, index) => {
+                                return <PokemonMove move={item} key={index} />;
+                            })
+                        ) : (
+                            <div></div>
+                        )}
                     </Slide>
                 </div>
 

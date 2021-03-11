@@ -1,9 +1,12 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import React from "react";
 
 import Home from "./components/Home/Home";
 import MyPokemon from "./components/Pokemons/MyPokemon";
 import PokemonDetail from "./components/Pokemons/PokemonDetail";
+
+import "./App.css";
 
 function App() {
     //graphql apollo
