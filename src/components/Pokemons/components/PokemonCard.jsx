@@ -3,7 +3,6 @@
 
 import { css, jsx, keyframes } from "@emotion/react";
 import { Link } from "react-router-dom";
-import Slide from "react-reveal/Slide";
 
 const PokemonCards = (props) => {
     let divCss = {
@@ -28,15 +27,13 @@ const PokemonCards = (props) => {
     };
 
     return (
-        <Slide bottom>
-            <Link to={`/pokemon-detail/${props.pokemon.name}`}>
-                <div css={[divCss, hoverCss]}>
-                    <img src={props.pokemon.image} alt="pokemon-img" />
+        <Link to={`/pokemon-detail/${props.pokemon.name}`}>
+            <div css={[divCss, hoverCss]}>
+                <img src={props.pokemon.image} alt="pokemon-img" />
 
-                    {capitalize(props.pokemon.name)}
-                </div>
-            </Link>
-        </Slide>
+                {capitalize(props.pokemon.name)}
+            </div>
+        </Link>
     );
 };
 

@@ -10,6 +10,7 @@ import Header from "../Header/Header";
 import Loading from "../Loading/Loading";
 import typeColor from "../../static/color";
 import PokemonStats from "./components/PokemonStats";
+import PokemonMove from "./components/PokemonMove";
 
 const PokemonDetail = (props) => {
     const cssBreakpoint = [320, 425, 768, 1024, 1440];
@@ -17,16 +18,20 @@ const PokemonDetail = (props) => {
 
     let { name } = useParams();
 
+    let globalCss = {
+        fontFamily: "Montserrat",
+    };
+
     let detailCss = {
         display: "flex",
         textAlign: "center",
         flexDirection: "column",
         alignItems: "center",
         paddingTop: "15vh",
-        width: "100%",
-        height: "100vh",
         userSelect: "none",
         backgroundColor: "#E4EBE0",
+        color: "#263F60",
+        paddingBottom: "10vh",
     };
 
     const GET_POKEMONS_DETAIL = gql`
@@ -53,6 +58,7 @@ const PokemonDetail = (props) => {
                 moves {
                     move {
                         name
+                        url
                     }
                 }
                 types {
@@ -71,8 +77,6 @@ const PokemonDetail = (props) => {
     const { loading, error, data } = useQuery(GET_POKEMONS_DETAIL, {
         variables: gqlVariables,
     });
-
-    console.log(data);
 
     if (loading) {
         return (
@@ -99,7 +103,7 @@ const PokemonDetail = (props) => {
         fontSize: "1.15em",
         borderRadius: "8px",
         [mqx[2]]: {
-            width: "75vw",
+            width: "90vw",
         },
     };
 
@@ -119,7 +123,7 @@ const PokemonDetail = (props) => {
         alignItems: "center",
         justifyContent: "center",
         fontSize: "0.75em",
-        marginBottom: "4vh",
+        marginBottom: "2vh",
     };
 
     const capitalize = (text) => {
@@ -131,54 +135,104 @@ const PokemonDetail = (props) => {
         flexDirection: "row",
         justifyContent: "center",
         flexWrap: "wrap",
+        marginBottom: "4vh",
+    };
+
+    let weightCss = {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        color: "#263F60",
+        marginBottom: "2vh",
+    };
+
+    let headerMoveCss = {
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+    };
+
+    let textCss = {
+        width: "20%",
+        fontSize: "0.75em",
+        fontWeight: 900,
+        [mqx[2]]: {
+            fontSize: "0.60em",
+        },
     };
 
     return (
-        <div>
+        <div css={globalCss}>
+            <style>
+                @import
+                url('https://fonts.googleapis.com/css?family=Montserrat');
+            </style>
             <Header active={props.active} menuItem={props.menuItem} />
             <div css={[detailCss]}>
-                <Slide bottom>
-                    <div css={cardCss}>
-                        <img
-                            css={imageCss}
-                            src={data.pokemon.sprites.front_default}
-                            alt="pokemon-sprites"
-                        />
-                        <Slide bottom>{capitalize(name)}</Slide>
+                <div css={cardCss}>
+                    <img
+                        css={imageCss}
+                        src={data.pokemon.sprites.front_default}
+                        alt="pokemon-sprites"
+                    />
+                    <Slide bottom>{capitalize(name)}</Slide>
+                    <div css={typeCss}>
+                        {data.pokemon.types.map((item, index) => {
+                            let typeCss = {
+                                display: "flex",
+                                flexDirection: "row",
+                                backgroundColor: typeColor[item.type.name],
+                                color: "white",
+                                margin: "0.5vh",
+                                padding: "0.75vh 1.5vh",
+                                borderRadius: "4px",
+                            };
+                            return (
+                                <Slide bottom>
+                                    <div css={typeCss}>
+                                        {capitalize(item.type.name)}
+                                    </div>
+                                </Slide>
+                            );
+                        })}
+                    </div>
+                    {/* Pokemon Weight */}
+                    <Slide bottom>
+                        <div css={weightCss}>
+                            <span>Weight</span>
+                            <span>{data.pokemon.weight} lbs</span>
+                        </div>
+                    </Slide>
 
-                        <div css={typeCss}>
-                            {data.pokemon.types.map((item, index) => {
-                                console.log(item);
-                                let typeCss = {
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    backgroundColor: typeColor[item.type.name],
-                                    color: "white",
-                                    margin: "0.5vh",
-                                    padding: "0.75vh 1.5vh",
-                                    borderRadius: "4px",
-                                };
+                    {/* Pokemon Stats */}
+                    <Slide bottom>
+                        <div css={statsCss}>
+                            {data.pokemon.stats.map((item, index) => {
                                 return (
-                                    <Slide bottom>
-                                        <div css={typeCss}>
-                                            {capitalize(item.type.name)}
-                                        </div>
-                                    </Slide>
+                                    <PokemonStats stats={item} key={index} />
                                 );
                             })}
                         </div>
+                    </Slide>
 
-                        {/* Pokemon Stats */}
-                        <Slide bottom>
-                            <div css={statsCss}>
-                                {data.pokemon.stats.map((item, index) => {
-                                    console.log(item);
-                                    return <PokemonStats stats={item} />;
-                                })}
-                            </div>
-                        </Slide>
-                    </div>
-                </Slide>
+                    {/* Pokemon Moves */}
+                    <Slide bottom>
+                        <span css={weightCss}>Moves</span>
+                        <div css={headerMoveCss}>
+                            <div css={textCss}>Name</div>
+                            <div css={textCss}>Type</div>
+                            <div css={textCss}>PP</div>
+                            <div css={textCss}>Power</div>
+                            <div css={textCss}>Priority</div>
+                        </div>
+                    </Slide>
+
+                    <Slide bottom>
+                        {data.pokemon.moves.map((item, index) => {
+                            return <PokemonMove move={item} key={index} />;
+                        })}
+                    </Slide>
+                </div>
             </div>
         </div>
     );

@@ -5,8 +5,6 @@ import Home from "./components/Home/Home";
 import MyPokemon from "./components/Pokemons/MyPokemon";
 import PokemonDetail from "./components/Pokemons/PokemonDetail";
 
-import "./app.css";
-
 function App() {
     //graphql apollo
     const client = new ApolloClient({

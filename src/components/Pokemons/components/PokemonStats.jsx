@@ -4,7 +4,6 @@
 import { jsx } from "@emotion/react";
 
 const PokemonStats = (props) => {
-    console.log(props);
     let css = {
         border: "1px solid #263F60",
         borderRadius: "8px",

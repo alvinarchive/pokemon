@@ -6,6 +6,7 @@ import { css, jsx, keyframes } from "@emotion/react";
 import { useQuery, gql } from "@apollo/client";
 import { Pagination } from "antd";
 import "antd/dist/antd.min.css";
+import Slide from "react-reveal/Slide";
 
 import Loading from "../Loading/Loading";
 import PokemonCards from "./components/PokemonCard";
@@ -112,9 +113,11 @@ const Pokemons = (props) => {
             />
 
             <div css={pokemonListCss}>
-                {data.pokemons.results.map((item, index) => {
-                    return <PokemonCards pokemon={item} key={index} />;
-                })}
+                <Slide bottom>
+                    {data.pokemons.results.map((item, index) => {
+                        return <PokemonCards pokemon={item} key={index} />;
+                    })}
+                </Slide>
             </div>
 
             <Pagination
