@@ -5,6 +5,9 @@ import { jsx } from "@emotion/react";
 import { Link } from "react-router-dom";
 
 const MenuItem = (props) => {
+    const cssBreakpoint = [320, 425, 768, 1024, 1440];
+    const mqx = cssBreakpoint.map((bp) => `@media (max-width: ${bp}px)`); //mediaquery max
+
     let css = {
         color: "#263F60",
         fontSize: "1.15em",
@@ -17,6 +20,9 @@ const MenuItem = (props) => {
         borderRadius: "8px",
         zIndex: 10,
         transition: "all 0.1s ease-in",
+        [mqx[2]]: {
+            fontSize: "1.5em",
+        },
     };
 
     let hoverCss = `&:hover {

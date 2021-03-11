@@ -1,8 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import React, { useEffect, useState } from "react";
-import { css, jsx } from "@emotion/react";
+import { jsx } from "@emotion/react";
 
 import Header from "../Header/Header";
 import Pokemons from "../Pokemons/Pokemons";

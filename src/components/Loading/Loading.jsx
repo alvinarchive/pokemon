@@ -1,8 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import React, { useEffect, useState } from "react";
-import { css, jsx, keyframes } from "@emotion/react";
+import { jsx, keyframes } from "@emotion/react";
 
 const Loading = () => {
     const cssBreakpoint = [320, 425, 768, 1024, 1440];
@@ -58,7 +57,11 @@ const Loading = () => {
 
     return (
         <div css={loadingCss}>
-            <img css={[imageCss, shakeAnim]} src="/pokeball.png" />
+            <img
+                css={[imageCss, shakeAnim]}
+                src="/pokeball.png"
+                alt="pokeball"
+            />
         </div>
     );
 };

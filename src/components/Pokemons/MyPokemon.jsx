@@ -1,8 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import React, { useEffect, useState } from "react";
-import { css, jsx } from "@emotion/react";
+import { jsx } from "@emotion/react";
 
 import Header from "../Header/Header";
 
@@ -11,8 +10,8 @@ const MyPokemon = (props) => {
         backgroundColor: "#E4EBE0",
         margin: 0,
         zIndex: 3,
+        fontFamily: "Montserrat",
     };
-
     return (
         <div css={headerCss}>
             <Header active={props.active} menuItem={props.menuItem} />

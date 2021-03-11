@@ -5,10 +5,10 @@ import React, { useEffect, useState } from "react";
 import { css, jsx, keyframes } from "@emotion/react";
 import { useQuery, gql } from "@apollo/client";
 import { Pagination } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 import Loading from "../Loading/Loading";
-import PokemonCards from "./PokemonCard";
+import PokemonCards from "./components/PokemonCard";
 
 const Pokemons = (props) => {
     const cssBreakpoint = [320, 425, 768, 1024, 1440];
@@ -91,7 +91,11 @@ const Pokemons = (props) => {
     if (loading)
         return (
             <div css={pokemonsCss}>
-                <img css={iconCss} src="/asset/pokemon_icon.png" />
+                <img
+                    css={iconCss}
+                    src="/asset/pokemon_icon.png"
+                    alt="pokemon-icon"
+                />
                 <Loading />
             </div>
         );
@@ -101,7 +105,11 @@ const Pokemons = (props) => {
 
     return (
         <div css={pokemonsCss}>
-            <img css={iconCss} src="/asset/pokemon_icon.png" />
+            <img
+                css={iconCss}
+                src="/asset/pokemon_icon.png"
+                alt="pokemon-icon"
+            />
 
             <div css={pokemonListCss}>
                 {data.pokemons.results.map((item, index) => {

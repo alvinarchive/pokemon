@@ -41,6 +41,7 @@ const Header = (props) => {
             width: "5vh",
             height: "5vh",
             display: "block",
+            margin: "2vh",
             right: 0,
             opacity: 1,
             position: "fixed",

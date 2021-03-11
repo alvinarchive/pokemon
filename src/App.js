@@ -2,7 +2,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 import Home from "./components/Home/Home";
-import MyPokemon from "./components/MyPokemon/MyPokemon";
+import MyPokemon from "./components/Pokemons/MyPokemon";
+import PokemonDetail from "./components/Pokemons/PokemonDetail";
+
+import "./app.css";
 
 function App() {
     //graphql apollo
@@ -39,6 +42,17 @@ function App() {
                             <MyPokemon
                                 menuItem={menuItem}
                                 active="My Pokemon"
+                            />
+                        }
+                    />
+
+                    <Route
+                        exact
+                        path="/pokemon-detail/:name"
+                        children={
+                            <PokemonDetail
+                                menuItem={menuItem}
+                                active="Pokemon Detail"
                             />
                         }
                     />
