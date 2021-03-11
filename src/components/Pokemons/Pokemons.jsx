@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { css, jsx, keyframes } from "@emotion/react";
 import { useQuery, gql } from "@apollo/client";
 import { Pagination } from "antd";
+import helper from "../../helper/functions";
 import "antd/dist/antd.min.css";
 import Slide from "react-reveal/Slide";
 
@@ -12,9 +13,6 @@ import Loading from "../Loading/Loading";
 import PokemonCards from "./components/PokemonCard";
 
 const Pokemons = (props) => {
-    const cssBreakpoint = [320, 425, 768, 1024, 1440];
-    const mqx = cssBreakpoint.map((bp) => `@media (max-width: ${bp}px)`); //mediaquery max
-
     let [offset, setOffset] = useState(0);
     let [currPage, setPage] = useState(1);
 
@@ -33,7 +31,7 @@ const Pokemons = (props) => {
     let iconCss = {
         width: "25vw",
         zIndex: 3,
-        [mqx[2]]: {
+        [helper.mqx[2]]: {
             width: "50vw",
         },
     };
@@ -47,7 +45,7 @@ const Pokemons = (props) => {
         textAlign: "center",
         alignItems: "center",
         justifyContent: "center",
-        [mqx[2]]: {
+        [helper.mqx[2]]: {
             width: "100%",
             marginTop: "5%",
         },

@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
+import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { css, jsx } from "@emotion/react";
@@ -11,12 +12,14 @@ import Loading from "../Loading/Loading";
 import typeColor from "../../static/color";
 import PokemonStats from "./components/PokemonStats";
 import PokemonMove from "./components/PokemonMove";
+import PokemonCatch from "./components/PokemonCatch";
 
 const PokemonDetail = (props) => {
     const cssBreakpoint = [320, 425, 768, 1024, 1440];
     const mqx = cssBreakpoint.map((bp) => `@media (max-width: ${bp}px)`); //mediaquery max
 
     let { name } = useParams();
+    let [isCatching, setIsCatching] = useState();
 
     let globalCss = {
         fontFamily: "Montserrat",
@@ -65,6 +68,10 @@ const PokemonDetail = (props) => {
                     type {
                         name
                     }
+                }
+                species {
+                    name
+                    url
                 }
             }
         }
@@ -144,6 +151,7 @@ const PokemonDetail = (props) => {
         justifyContent: "center",
         color: "#263F60",
         marginBottom: "2vh",
+        marginTop: "2vh",
     };
 
     let headerMoveCss = {
@@ -161,6 +169,38 @@ const PokemonDetail = (props) => {
         },
     };
 
+    let pokeballCss = {
+        position: "fixed",
+        right: 0,
+        bottom: 0,
+        padding: "3vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        transition: "transform .2s",
+
+        [mqx[2]]: {
+            fontSize: "0.75em",
+        },
+    };
+
+    let pokeballImageCss = {
+        width: "5vw",
+        [mqx[2]]: {
+            width: "15vw",
+        },
+    };
+
+    let hoverCss = `&:hover {
+        cursor: pointer;
+        transform: scale(1.15);
+    }`;
+
+    const onPokeballClicked = () => {
+        setIsCatching(true);
+    };
+
     return (
         <div css={globalCss}>
             <style>
@@ -168,6 +208,10 @@ const PokemonDetail = (props) => {
                 url('https://fonts.googleapis.com/css?family=Montserrat');
             </style>
             <Header active={props.active} menuItem={props.menuItem} />
+
+            {/* Catching Page */}
+            {isCatching ? <PokemonCatch setIsCatching={setIsCatching} /> : ""}
+
             <div css={[detailCss]}>
                 <div css={cardCss}>
                     <img
@@ -232,6 +276,15 @@ const PokemonDetail = (props) => {
                             return <PokemonMove move={item} key={index} />;
                         })}
                     </Slide>
+                </div>
+
+                <div css={[pokeballCss, hoverCss]} onClick={onPokeballClicked}>
+                    <img
+                        css={pokeballImageCss}
+                        src="/pokeball.png"
+                        alt="pokeball"
+                    />
+                    <span> Catch Pokemon !</span>
                 </div>
             </div>
         </div>

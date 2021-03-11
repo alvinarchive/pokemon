@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import { css, jsx, keyframes } from "@emotion/react";
+import { jsx } from "@emotion/react";
 import { Link } from "react-router-dom";
 
 const PokemonCards = (props) => {

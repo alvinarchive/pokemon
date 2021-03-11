@@ -3,12 +3,10 @@
 
 import { useQuery, gql } from "@apollo/client";
 import { css, jsx } from "@emotion/react";
+import helper from "../../../helper/functions";
 import colorType from "../../../static/color";
 
 const PokemonMove = (props) => {
-    const cssBreakpoint = [320, 425, 768, 1024, 1440];
-    const mqx = cssBreakpoint.map((bp) => `@media (max-width: ${bp}px)`); //mediaquery max
-
     const GET_MOVE_DETAIL = gql`
         query move($move: String!) {
             move(move: $move) {
@@ -31,7 +29,7 @@ const PokemonMove = (props) => {
     let textCss = {
         width: "20%",
         fontSize: "0.75em",
-        [mqx[2]]: {
+        [helper.mqx[2]]: {
             fontSize: "0.60em",
         },
     };
