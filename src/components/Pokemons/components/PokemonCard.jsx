@@ -3,6 +3,7 @@
 
 import { jsx } from "@emotion/react";
 import { Link } from "react-router-dom";
+import { capitalize } from "../../../helper/functions";
 
 const PokemonCards = (props) => {
     let divCss = {
@@ -21,10 +22,6 @@ const PokemonCards = (props) => {
         cursor: pointer;
         transform: scale(1.3);
     }`;
-
-    const capitalize = (text) => {
-        return text.charAt(0).toUpperCase() + text.slice(1);
-    };
 
     return (
         <Link to={`/pokemon-detail/${props.pokemon.name}`}>

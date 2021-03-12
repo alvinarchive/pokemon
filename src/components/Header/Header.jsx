@@ -4,11 +4,9 @@
 import { useEffect, useState } from "react";
 import { jsx, keyframes } from "@emotion/react";
 import MenuItem from "./MenuItem";
+import { mqx } from "../../helper/functions";
 
 const Header = (props) => {
-    const cssBreakpoint = [320, 425, 768, 1024, 1440];
-    const mqx = cssBreakpoint.map((bp) => `@media (max-width: ${bp}px)`); //mediaquery max
-
     let [isMenuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {}, [isMenuOpen]);

@@ -9,10 +9,10 @@ import Slide from "react-reveal/Slide";
 
 import Header from "../Header/Header";
 import Loading from "../Loading/Loading";
-import typeColor from "../../static/color";
 import PokemonStats from "./components/PokemonStats";
-import PokemonMove from "./components/PokemonMove";
+import PokemonMoves from "./components/PokemonMoves";
 import PokemonCatch from "./components/PokemonCatch";
+import PokemonDetailHeader from "./components/PokemonDetailHeader";
 
 const PokemonDetail = (props) => {
     const cssBreakpoint = [320, 425, 768, 1024, 1440];
@@ -99,10 +99,6 @@ const PokemonDetail = (props) => {
         );
     }
 
-    if (error) {
-        return <div>error</div>;
-    }
-
     let cardCss = {
         display: "flex",
         width: "50vw",
@@ -116,61 +112,6 @@ const PokemonDetail = (props) => {
         borderRadius: "8px",
         [mqx[2]]: {
             width: "90vw",
-        },
-    };
-
-    let imageCss = {
-        width: "20vh",
-        margin: "auto",
-        textAlign: "center",
-        alignItems: "center",
-        justifyContent: "center",
-    };
-
-    let typeCss = {
-        display: "flex",
-        flexDirection: "row",
-        width: "100%",
-        textAlign: "center",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: "0.75em",
-        marginBottom: "2vh",
-    };
-
-    const capitalize = (text) => {
-        return text.charAt(0).toUpperCase() + text.slice(1);
-    };
-
-    let statsCss = {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        flexWrap: "wrap",
-        marginBottom: "4vh",
-    };
-
-    let weightCss = {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        color: "#263F60",
-        marginBottom: "2vh",
-        marginTop: "2vh",
-    };
-
-    let headerMoveCss = {
-        display: "flex",
-        flexDirection: "row",
-        width: "100%",
-    };
-
-    let textCss = {
-        width: "20%",
-        fontSize: "0.75em",
-        fontWeight: 900,
-        [mqx[2]]: {
-            fontSize: "0.60em",
         },
     };
 
@@ -219,69 +160,9 @@ const PokemonDetail = (props) => {
 
             <div css={[detailCss]}>
                 <div css={cardCss}>
-                    <img
-                        css={imageCss}
-                        src={data.pokemon.sprites.front_default}
-                        alt="pokemon-sprites"
-                    />
-                    <Slide bottom>{capitalize(name)}</Slide>
-                    <div css={typeCss}>
-                        {data.pokemon.types.map((item, index) => {
-                            let typeCss = {
-                                display: "flex",
-                                flexDirection: "row",
-                                backgroundColor: typeColor[item.type.name],
-                                color: "white",
-                                margin: "0.5vh",
-                                padding: "0.75vh 1.5vh",
-                                borderRadius: "4px",
-                            };
-                            return (
-                                <Slide bottom>
-                                    <div css={typeCss}>
-                                        {capitalize(item.type.name)}
-                                    </div>
-                                </Slide>
-                            );
-                        })}
-                    </div>
-                    {/* Pokemon Weight */}
-                    <Slide bottom>
-                        <div css={weightCss}>
-                            <span>Weight</span>
-                            <span>{data.pokemon.weight} lbs</span>
-                        </div>
-                    </Slide>
-                    {/* Pokemon Stats */}
-                    <Slide bottom>
-                        <div css={statsCss}>
-                            {data.pokemon.stats.map((item, index) => {
-                                return (
-                                    <PokemonStats stats={item} key={index} />
-                                );
-                            })}
-                        </div>
-                    </Slide>
-                    Pokemon Moves
-                    <Slide bottom>
-                        <span css={weightCss}>Moves</span>
-                        <div css={headerMoveCss}>
-                            <div css={textCss}>Name</div>
-                            <div css={textCss}>Type</div>
-                            <div css={textCss}>PP</div>
-                            <div css={textCss}>Power</div>
-                            <div css={textCss}>Priority</div>
-                        </div>
-                    </Slide>
-                    <Slide bottom>
-                        {data.pokemon.moves.length > 0 ? (
-                            data.pokemon.moves.map((item, index) => {
-                                return <PokemonMove move={item} key={index} />;
-                            })
-                        ) : (
-                            <div></div>
-                        )}
-                    </Slide>
+                    <PokemonDetailHeader data={data} name={name} />
+                    <PokemonStats data={data} />
+                    <PokemonMoves data={data} />
                 </div>
 
                 <div css={[pokeballCss, hoverCss]} onClick={onPokeballClicked}>

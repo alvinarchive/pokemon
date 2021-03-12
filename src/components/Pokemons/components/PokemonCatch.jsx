@@ -23,10 +23,7 @@ const PokemonCatch = (props) => {
                 timeoutCatching = setTimeout(() => {
                     console.log(message[catchStatus]);
                     setCatchMessage(message[catchStatus]);
-
-                    timeoutCatchingParent = setTimeout(() => {
-                        props.setIsCatching(false);
-                    }, 1500);
+                    setCanClose(true);
                 }, 3500);
             } else {
                 timeoutCatching = setTimeout(() => {

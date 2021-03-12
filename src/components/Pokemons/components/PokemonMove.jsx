@@ -3,7 +3,7 @@
 
 import { useQuery, gql } from "@apollo/client";
 import { css, jsx } from "@emotion/react";
-import helper from "../../../helper/functions";
+import { mqx } from "../../../helper/functions";
 import colorType from "../../../static/color";
 
 const PokemonMove = (props) => {
@@ -29,7 +29,7 @@ const PokemonMove = (props) => {
     let textCss = {
         width: "20%",
         fontSize: "0.75em",
-        [helper.mqx[2]]: {
+        [mqx[2]]: {
             fontSize: "0.60em",
         },
     };

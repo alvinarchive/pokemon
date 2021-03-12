@@ -2,11 +2,9 @@
 /** @jsx jsx */
 
 import { jsx, keyframes } from "@emotion/react";
+import { mqx } from "../../helper/functions";
 
 const Loading = () => {
-    const cssBreakpoint = [320, 425, 768, 1024, 1440];
-    const mqx = cssBreakpoint.map((bp) => `@media (max-width: ${bp}px)`); //mediaquery max
-
     let imageCss = {
         width: "10vw",
         [mqx[2]]: {

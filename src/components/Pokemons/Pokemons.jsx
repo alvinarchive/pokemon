@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { css, jsx, keyframes } from "@emotion/react";
 import { useQuery, gql } from "@apollo/client";
 import { Pagination } from "antd";
-import helper from "../../helper/functions";
+import { mqx } from "../../helper/functions";
 import "antd/dist/antd.min.css";
 import Slide from "react-reveal/Slide";
 
@@ -31,7 +31,7 @@ const Pokemons = (props) => {
     let iconCss = {
         width: "25vw",
         zIndex: 3,
-        [helper.mqx[2]]: {
+        [mqx[2]]: {
             width: "50vw",
         },
     };
@@ -45,7 +45,7 @@ const Pokemons = (props) => {
         textAlign: "center",
         alignItems: "center",
         justifyContent: "center",
-        [helper.mqx[2]]: {
+        [mqx[2]]: {
             width: "100%",
             marginTop: "5%",
         },
@@ -122,11 +122,11 @@ const Pokemons = (props) => {
                 css={paginationCss}
                 total={data.pokemons.count}
                 current={currPage}
-                showSizeChanger
                 showQuickJumper
                 pageSize={32}
                 responsive={true}
                 onChange={onPaginationChanged}
+                showSizeChanger={false}
                 showTotal={(total) => `Total ${total} items`}
             />
         </div>
