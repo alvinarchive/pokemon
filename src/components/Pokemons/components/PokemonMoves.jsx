@@ -6,7 +6,6 @@ import { css, jsx } from "@emotion/react";
 import { mqx } from "../../../helper/functions";
 import Slide from "react-reveal/Slide";
 import { Pagination } from "antd";
-import "antd/dist/antd.min.css";
 
 import PokemonMove from "./PokemonMove";
 

@@ -6,7 +6,6 @@ import { css, jsx, keyframes } from "@emotion/react";
 import { useQuery, gql } from "@apollo/client";
 import { Pagination } from "antd";
 import { mqx } from "../../helper/functions";
-import "antd/dist/antd.min.css";
 import Slide from "react-reveal/Slide";
 
 import Loading from "../Loading/Loading";
