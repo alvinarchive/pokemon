@@ -65,7 +65,7 @@ const Pokemons = (props) => {
     };
 
     const onPaginationChanged = (page, pageSize) => {
-        setOffset(32 * (page - 1));
+        setOffset(24 * (page - 1));
         setPage(page);
     };
 
@@ -87,7 +87,7 @@ const Pokemons = (props) => {
     `;
 
     const gqlVariables = {
-        limit: 32,
+        limit: 24,
         offset: offset,
     };
 
