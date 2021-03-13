@@ -156,7 +156,14 @@ const PokemonDetail = (props) => {
             <Header active={props.active} menuItem={props.menuItem} />
 
             {/* Catching Page */}
-            {isCatching ? <PokemonCatch setIsCatching={setIsCatching} /> : ""}
+            {isCatching ? (
+                <PokemonCatch
+                    setIsCatching={setIsCatching}
+                    pokemonData={data}
+                />
+            ) : (
+                ""
+            )}
 
             <div css={[detailCss]}>
                 <div css={cardCss}>

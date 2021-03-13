@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import { jsx, keyframes } from "@emotion/react";
 import MenuItem from "./MenuItem";
 import { mqx } from "../../helper/functions";
+import { fadeIn } from "../../helper/anim";
 
 const Header = (props) => {
     let [isMenuOpen, setMenuOpen] = useState(false);
-
-    useEffect(() => {}, [isMenuOpen]);
 
     let ulCss = {
         position: "fixed",
@@ -49,14 +48,6 @@ const Header = (props) => {
             zIndex: isMenuOpen ? 11 : 11,
         },
     };
-
-    let fadeIn = keyframes`
-        from, 0%, to {
-            opacity: 0; 
-        }
-        100% {
-            opacity: 1;
-        }`;
 
     let menuOpenCss = {
         [mqx[2]]: {

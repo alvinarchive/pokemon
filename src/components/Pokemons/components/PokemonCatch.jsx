@@ -3,91 +3,44 @@
 
 import React, { useEffect, useState } from "react";
 import { css, jsx, keyframes } from "@emotion/react";
+import { bounce, shake, fadeIn } from "../../../helper/anim";
+import { mqx } from "../../../helper/functions";
+import { Input } from "antd";
+import "antd/dist/antd.min.css";
 
 const PokemonCatch = (props) => {
+    const { Search } = Input;
+
     let message = {
-        true: "Successfuly Catch The Pokemon !",
-        false: "Failed to Catch The Pokemon !",
+        true: "Successfuly Catch The Pokemon!",
+        false: "Failed to Catch The Pokemon!",
+        tapToClose: "Tap the screen to close!",
     };
 
     let [catchStatus, setCatchStatus] = useState(Math.random() < 0.5);
     let [catchMessage, setCatchMessage] = useState("");
+    let [pokemonCatchSuccess, setSuccessState] = useState(false);
     let [canClose, setCanClose] = useState(false);
 
     useEffect(
         () => {
             let timeoutCatching;
-            let timeoutCatchingParent;
 
             if (!catchStatus) {
                 timeoutCatching = setTimeout(() => {
-                    console.log(message[catchStatus]);
                     setCatchMessage(message[catchStatus]);
                     setCanClose(true);
                 }, 3500);
             } else {
                 timeoutCatching = setTimeout(() => {
-                    console.log(message[catchStatus]);
                     setCatchMessage(message[catchStatus]);
-                    setCanClose(true);
+                    setSuccessState(true);
                 }, 5000);
             }
         },
         catchStatus,
         catchMessage
     );
-
-    const bounce = keyframes`
-        from, 20%, 53%, 80%, to {
-        transform: translate3d(0,0,0);
-        }
-    
-        40%, 43% {
-        transform: translate3d(0, -49px, 0);
-        }
-    
-        70% {
-        transform: translate3d(0, -15px, 0);
-        }
-    
-        90% {
-        transform: translate3d(0,-4px,0);
-        }
-  `;
-
-    const shake = keyframes`
-        from, 0, to {
-            transform: translate(0, 0) rotate(0);
-        }
-
-        20% {
-            transform: translate(-10px, 0) rotate(-20deg);
-        }
-
-        30% {
-            transform: translate(10px, 0) rotate(20deg);
-        }
-
-        50% {
-            transform: translate(-10px, 0) rotate(-10deg);
-        }
-
-        60% {
-            transform: translate(10px, 0) rotate(10deg);
-        }
-
-        100% {
-            transform: translate(0, 0) rotate(0);
-        }
-        `;
-
-    let fadeIn = keyframes`
-        from, 0%, to {
-            opacity: 0; 
-        }
-        100% {
-            opacity: 1;
-        }`;
 
     let catchingPage = {
         position: "fixed",
@@ -99,10 +52,31 @@ const PokemonCatch = (props) => {
         alignItems: "center",
         justifyContent: "center",
         zIndex: 50,
-        backgroundColor: "#00000066",
+        backgroundColor: "#00000096",
         width: "100vw",
         height: "100vh",
         animation: `${fadeIn} 0.5s ease-in`,
+        [mqx[2]]: {
+            fontSize: "0.85em",
+        },
+    };
+
+    let enterNicknameCss = {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+    };
+    let textSuccessCss = {
+        marginTop: "2vh",
+        fontSize: "0.70em",
+        [mqx[2]]: {
+            fontSize: "0.600em",
+        },
+    };
+
+    let textCss = {
+        whiteSpace: "pre",
     };
 
     const rotateCount = () => {
@@ -115,6 +89,11 @@ const PokemonCatch = (props) => {
 
     let catchingCss = {
         animation: `${bounce} 1s ease 1,  ${shake} 1.25s cubic-bezier(.36,.07,.19,.97) ${rotateCount()} 1s forwards`,
+        marginTop: "4vh",
+
+        [mqx[2]]: {
+            width: "35vw",
+        },
     };
 
     const onPageClicked = () => {
@@ -123,9 +102,41 @@ const PokemonCatch = (props) => {
         }
     };
 
+    const onEnter = (value) => {
+        let saveObject = {
+            name: props.pokemonData.pokemon.name,
+            nickname: value,
+        };
+
+        localStorage.setItem("myPokemon", JSON.stringify(saveObject));
+        props.setIsCatching(false);
+    };
+
     return (
         <div css={catchingPage} onClick={onPageClicked}>
-            <span>{catchMessage}</span>
+            <span css={textCss}>{catchMessage}</span>
+            <span css={textCss}>
+                {catchMessage && catchMessage == message.false
+                    ? message.tapToClose
+                    : ""}
+            </span>
+            {pokemonCatchSuccess ? (
+                <div css={enterNicknameCss}>
+                    <span css={[textCss, textSuccessCss]}>
+                        Enter Pokemon Nickname
+                    </span>
+                    <Search
+                        placeholder="Enter Pokemon NIckname"
+                        allowClear
+                        enterButton="Search"
+                        size="large"
+                        onSearch={onEnter}
+                    />
+                </div>
+            ) : (
+                <div></div>
+            )}
+
             <img css={catchingCss} src="/pokeball.png" />
         </div>
     );
