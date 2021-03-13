@@ -32,6 +32,15 @@ const PokemonDetail = (props) => {
         paddingBottom: "15vh",
     };
 
+    let errorCss = {
+        display: "flex",
+        width: "100vw",
+        height: "100vh",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#E4EBE0",
+    };
+
     const GET_POKEMONS_DETAIL = gql`
         query pokemon($name: String!) {
             pokemon(name: $name) {
@@ -92,6 +101,9 @@ const PokemonDetail = (props) => {
             </div>
         );
     }
+
+    if (error)
+        return <div css={errorCss}>Somethings wrong, please try again</div>;
 
     let cardCss = {
         display: "flex",

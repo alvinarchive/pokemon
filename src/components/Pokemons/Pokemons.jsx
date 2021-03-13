@@ -37,8 +37,6 @@ const Pokemons = (props) => {
         backgroundColor: "#E4EBE0",
     };
 
-    let errorCssText = {};
-
     let iconCss = {
         width: "25vw",
         zIndex: 3,
