@@ -117,8 +117,7 @@ const Pokemons = (props) => {
                 css={iconCss}
                 src="/asset/pokemon_icon.png"
                 alt="pokemon-icon"
-                width="266px"
-                height="136.5px"
+                width="7.5vw"
             />
 
             <div css={pokemonListCss}>
