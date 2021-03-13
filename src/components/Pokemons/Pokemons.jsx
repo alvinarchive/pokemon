@@ -28,6 +28,16 @@ const Pokemons = (props) => {
         backgroundColor: "#E4EBE0",
     };
 
+    let errorCss = {
+        width: "100vw",
+        height: "100vh",
+
+        backgroundColor: "#E4EBE0",
+        textAlign: "center",
+        alignItems: "center",
+        justifyContent: "center",
+    };
+
     let iconCss = {
         width: "25vw",
         zIndex: 3,
@@ -100,7 +110,7 @@ const Pokemons = (props) => {
         );
 
     if (error)
-        return <div css={pokemonsCss}>Somethings wrong, please try again</div>;
+        return <div css={errorCss}>Somethings wrong, please try again</div>;
 
     return (
         <div css={pokemonsCss}>
