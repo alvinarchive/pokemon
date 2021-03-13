@@ -29,14 +29,15 @@ const Pokemons = (props) => {
     };
 
     let errorCss = {
+        display: "flex",
         width: "100vw",
         height: "100vh",
-
-        backgroundColor: "#E4EBE0",
-        textAlign: "center",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#E4EBE0",
     };
+
+    let errorCssText = {};
 
     let iconCss = {
         width: "25vw",
