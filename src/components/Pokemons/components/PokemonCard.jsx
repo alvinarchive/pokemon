@@ -23,6 +23,10 @@ const PokemonCards = (props) => {
         transform: scale(1.3);
     }`;
 
+    let imageCss = {
+        alignSelf: "center",
+    };
+
     return (
         <Link
             to={`/pokemon-detail/${props.pokemon.name}${
@@ -30,7 +34,13 @@ const PokemonCards = (props) => {
             }`}
         >
             <div css={[divCss, hoverCss]}>
-                <img src={props.pokemon.image} alt="pokemon-img" />
+                <img
+                    src={props.pokemon.image}
+                    css={imageCss}
+                    alt="pokemon-img"
+                    width="96px"
+                    height="96px"
+                />
 
                 {capitalize(
                     props.pokemon.nickname
