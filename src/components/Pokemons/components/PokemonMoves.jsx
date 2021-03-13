@@ -80,7 +80,6 @@ const PokemonMoves = (props) => {
             <Slide bottom>
                 {props.data.pokemon.moves.length > 0 ? (
                     pokemonMovesData.map((item, index) => {
-                        console.log("ALVIN", item, index);
                         return <PokemonMove move={item} key={index} />;
                     })
                 ) : (

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { css, jsx } from "@emotion/react";
-import Slide from "react-reveal/Slide";
+import { mqx } from "../../helper/functions";
 
 import Header from "../Header/Header";
 import Loading from "../Loading/Loading";
@@ -15,15 +15,9 @@ import PokemonCatch from "./components/PokemonCatch";
 import PokemonDetailHeader from "./components/PokemonDetailHeader";
 
 const PokemonDetail = (props) => {
-    const cssBreakpoint = [320, 425, 768, 1024, 1440];
-    const mqx = cssBreakpoint.map((bp) => `@media (max-width: ${bp}px)`); //mediaquery max
+    let { name, nickname } = useParams();
 
-    let { name } = useParams();
     let [isCatching, setIsCatching] = useState();
-
-    let globalCss = {
-        fontFamily: "Montserrat",
-    };
 
     let detailCss = {
         display: "flex",
@@ -35,7 +29,7 @@ const PokemonDetail = (props) => {
         backgroundColor: "#E4EBE0",
         color: "#263F60",
         minHeight: "100vh",
-        paddingBottom: "10vh",
+        paddingBottom: "15vh",
     };
 
     const GET_POKEMONS_DETAIL = gql`
@@ -148,11 +142,7 @@ const PokemonDetail = (props) => {
     };
 
     return (
-        <div css={globalCss}>
-            <style>
-                @import
-                url('https://fonts.googleapis.com/css?family=Montserrat');
-            </style>
+        <div>
             <Header active={props.active} menuItem={props.menuItem} />
 
             {/* Catching Page */}
@@ -165,9 +155,13 @@ const PokemonDetail = (props) => {
                 ""
             )}
 
-            <div css={[detailCss]}>
+            <div css={detailCss}>
                 <div css={cardCss}>
-                    <PokemonDetailHeader data={data} name={name} />
+                    <PokemonDetailHeader
+                        data={data}
+                        name={name}
+                        nickname={nickname}
+                    />
                     <PokemonStats data={data} />
                     <PokemonMoves data={data} />
                 </div>

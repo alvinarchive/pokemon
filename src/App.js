@@ -49,7 +49,7 @@ function App() {
 
                     <Route
                         exact
-                        path="/pokemon-detail/:name"
+                        path="/pokemon-detail/:name/:nickname?"
                         children={
                             <PokemonDetail
                                 menuItem={menuItem}

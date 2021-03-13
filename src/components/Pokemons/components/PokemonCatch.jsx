@@ -19,6 +19,8 @@ const PokemonCatch = (props) => {
 
     let [catchStatus, setCatchStatus] = useState(Math.random() < 0.5);
     let [catchMessage, setCatchMessage] = useState("");
+    let [errorMessage, setErrorMessage] = useState("");
+
     let [pokemonCatchSuccess, setSuccessState] = useState(false);
     let [canClose, setCanClose] = useState(false);
 
@@ -66,6 +68,9 @@ const PokemonCatch = (props) => {
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
+        [mqx[2]]: {
+            width: "90vw",
+        },
     };
     let textSuccessCss = {
         marginTop: "2vh",
@@ -77,6 +82,11 @@ const PokemonCatch = (props) => {
 
     let textCss = {
         whiteSpace: "pre",
+    };
+
+    let errorCss = {
+        color: "red",
+        fontSize: "0.60em",
     };
 
     const rotateCount = () => {
@@ -103,12 +113,35 @@ const PokemonCatch = (props) => {
     };
 
     const onEnter = (value) => {
+        if (!value) {
+            setErrorMessage("Cannot use empty nickname");
+            return;
+        }
+
         let saveObject = {
             name: props.pokemonData.pokemon.name,
             nickname: value,
+            image: props.pokemonData.pokemon.sprites.front_default,
         };
 
-        localStorage.setItem("myPokemon", JSON.stringify(saveObject));
+        let pokemons = JSON.parse(localStorage.getItem("myPokemon"));
+
+        if (!pokemons) {
+            pokemons = [];
+        }
+
+        for (let i = 0; i < pokemons.length; i++) {
+            if (
+                pokemons[i].nickname.toLowerCase() == value.toLowerCase() &&
+                pokemons[i].name == props.pokemonData.pokemon.name
+            ) {
+                setErrorMessage("Nickname for this pokemon already used");
+                return;
+            }
+        }
+
+        pokemons.push(saveObject);
+        localStorage.setItem("myPokemon", JSON.stringify(pokemons));
         props.setIsCatching(false);
     };
 
@@ -126,12 +159,13 @@ const PokemonCatch = (props) => {
                         Enter Pokemon Nickname
                     </span>
                     <Search
-                        placeholder="Enter Pokemon NIckname"
+                        placeholder="Nickname"
                         allowClear
-                        enterButton="Search"
+                        enterButton="Enter"
                         size="large"
                         onSearch={onEnter}
                     />
+                    <span css={errorCss}>{errorMessage}</span>
                 </div>
             ) : (
                 <div></div>

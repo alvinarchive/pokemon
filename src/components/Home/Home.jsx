@@ -12,15 +12,10 @@ const Home = (props) => {
         height: "100%",
         margin: 0,
         zIndex: 3,
-        fontFamily: "Montserrat",
     };
 
     return (
         <div css={css}>
-            <style>
-                @import
-                url('https://fonts.googleapis.com/css?family=Montserrat');
-            </style>
             <Header active={props.active} menuItem={props.menuItem} />
             <Pokemons />
         </div>

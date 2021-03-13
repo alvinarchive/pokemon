@@ -21,7 +21,7 @@ const Loading = () => {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        height: "100%",
+        height: "100vh",
     };
 
     let shakeAnim = {

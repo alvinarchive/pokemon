@@ -24,11 +24,19 @@ const PokemonCards = (props) => {
     }`;
 
     return (
-        <Link to={`/pokemon-detail/${props.pokemon.name}`}>
+        <Link
+            to={`/pokemon-detail/${props.pokemon.name}${
+                props.pokemon.nickname ? `/${props.pokemon.nickname}` : ""
+            }`}
+        >
             <div css={[divCss, hoverCss]}>
                 <img src={props.pokemon.image} alt="pokemon-img" />
 
-                {capitalize(props.pokemon.name)}
+                {capitalize(
+                    props.pokemon.nickname
+                        ? props.pokemon.nickname
+                        : props.pokemon.name
+                )}
             </div>
         </Link>
     );

@@ -42,7 +42,10 @@ const PokemonDetailHeader = (props) => {
                 src={props.data.pokemon.sprites.front_default}
                 alt="pokemon-sprites"
             />
-            <Slide bottom>{capitalize(props.name)}</Slide>
+            <Slide bottom>
+                {capitalize(props.nickname ? props.nickname : props.name)}
+                {props.nickname ? `(${capitalize(props.name)})` : ""}
+            </Slide>
             <div css={typeCss}>
                 {props.data.pokemon.types.map((item, index) => {
                     let typeCss = {
