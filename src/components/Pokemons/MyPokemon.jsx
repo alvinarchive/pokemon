@@ -81,7 +81,7 @@ const MyPokemon = (props) => {
 
         let newPokemons = JSON.parse(localStorage.getItem("myPokemon"));
         setMyPokemons(newPokemons ? newPokemons : []);
-        pokemonContext.setPokemonsState(newPokemons);
+        pokemonContext.setPokemonsState(newPokemons ? newPokemons : []);
         setModalVisibility(false);
     };
 
