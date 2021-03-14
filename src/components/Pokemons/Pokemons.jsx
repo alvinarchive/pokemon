@@ -51,6 +51,8 @@ const Pokemons = (props) => {
         flexWrap: "wrap",
         flexDirection: "row",
         alignItems: "center",
+        justifyContent: "center",
+
         [mqx[2]]: {
             width: "100%",
             marginTop: "5%",
