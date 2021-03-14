@@ -5,6 +5,7 @@ import React from "react";
 import Home from "./components/Home/Home";
 import MyPokemon from "./components/Pokemons/MyPokemon";
 import PokemonDetail from "./components/Pokemons/PokemonDetail";
+import PokemonContextProvider from "./components/PokemonContext/PokemonContext";
 
 import "./App.css";
 import "antd/dist/antd.min.css";
@@ -32,32 +33,36 @@ function App() {
         <ApolloProvider client={client}>
             <BrowserRouter>
                 <Switch>
-                    <Route
-                        exact
-                        path="/"
-                        children={<Home menuItem={menuItem} active="Home" />}
-                    />
-                    <Route
-                        exact
-                        path="/my-pokemon"
-                        children={
-                            <MyPokemon
-                                menuItem={menuItem}
-                                active="My Pokemon"
-                            />
-                        }
-                    />
+                    <PokemonContextProvider>
+                        <Route
+                            exact
+                            path="/"
+                            children={
+                                <Home menuItem={menuItem} active="Home" />
+                            }
+                        />
+                        <Route
+                            exact
+                            path="/my-pokemon"
+                            children={
+                                <MyPokemon
+                                    menuItem={menuItem}
+                                    active="My Pokemon"
+                                />
+                            }
+                        />
 
-                    <Route
-                        exact
-                        path="/pokemon-detail/:name/:nickname?"
-                        children={
-                            <PokemonDetail
-                                menuItem={menuItem}
-                                active="Pokemon Detail"
-                            />
-                        }
-                    />
+                        <Route
+                            exact
+                            path="/pokemon-detail/:name/:nickname?"
+                            children={
+                                <PokemonDetail
+                                    menuItem={menuItem}
+                                    active="Pokemon Detail"
+                                />
+                            }
+                        />
+                    </PokemonContextProvider>
                 </Switch>
             </BrowserRouter>
         </ApolloProvider>

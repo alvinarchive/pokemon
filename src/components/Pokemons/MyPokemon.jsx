@@ -2,17 +2,18 @@
 /** @jsx jsx */
 
 import { css, jsx } from "@emotion/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { mqx } from "../../helper/functions";
 import { Modal } from "antd";
 
 import Header from "../Header/Header";
 import PokemonCard from "./components/PokemonCard";
+import { PokemonContext } from "../PokemonContext/PokemonContext";
 
 const MyPokemon = (props) => {
-    let pokemons = JSON.parse(localStorage.getItem("myPokemon"));
+    let pokemonContext = useContext(PokemonContext);
 
-    let [myPokemons, setMyPokemons] = useState(pokemons ? pokemons : []);
+    let [myPokemons, setMyPokemons] = useState(pokemonContext.pokemonsState);
     let [modalVisibility, setModalVisibility] = useState(false);
     let [modalTitle, setModalTitle] = useState("");
     let [modalText, setModalText] = useState("");
@@ -36,6 +37,10 @@ const MyPokemon = (props) => {
         marginBottom: "5vh",
     };
 
+    let noPokemonCss = {
+        margin: "auto",
+    };
+
     let pokemonListCss = {
         marginTop: "2.5%",
         display: "flex",
@@ -44,7 +49,6 @@ const MyPokemon = (props) => {
         flexDirection: "row",
         textAlign: "center",
         alignItems: "center",
-        justifyContent: "center",
         [mqx[2]]: {
             width: "100%",
             marginTop: "5%",
@@ -77,6 +81,7 @@ const MyPokemon = (props) => {
 
         let newPokemons = JSON.parse(localStorage.getItem("myPokemon"));
         setMyPokemons(newPokemons ? newPokemons : []);
+        pokemonContext.setPokemonsState(newPokemons);
         setModalVisibility(false);
     };
 
@@ -104,7 +109,7 @@ const MyPokemon = (props) => {
                             );
                         })
                     ) : (
-                        <div>No Pokemon Found</div>
+                        <div css={noPokemonCss}>No Pokemon Found</div>
                     )}
                 </div>
             </div>

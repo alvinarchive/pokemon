@@ -44,7 +44,7 @@ const PokemonDetailHeader = (props) => {
             />
             <Slide bottom>
                 {capitalize(props.nickname ? props.nickname : props.name)}
-                {props.nickname ? `(${capitalize(props.name)})` : ""}
+                {capitalize(props.nickname ? `(${props.name})` : "")}
             </Slide>
             <div css={typeCss}>
                 {props.data.pokemon.types.map((item, index) => {

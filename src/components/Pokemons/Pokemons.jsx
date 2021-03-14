@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { css, jsx, keyframes } from "@emotion/react";
 import { useQuery, gql } from "@apollo/client";
 import { Pagination } from "antd";
@@ -50,9 +50,7 @@ const Pokemons = (props) => {
         width: "50%",
         flexWrap: "wrap",
         flexDirection: "row",
-        textAlign: "center",
         alignItems: "center",
-        justifyContent: "center",
         [mqx[2]]: {
             width: "100%",
             marginTop: "5%",

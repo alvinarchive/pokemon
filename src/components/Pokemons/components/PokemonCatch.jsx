@@ -1,14 +1,17 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { css, jsx, keyframes } from "@emotion/react";
 import { bounce, shake, fadeIn } from "../../../helper/anim";
 import { mqx } from "../../../helper/functions";
 import { Input } from "antd";
 import { v4 as uuid } from "uuid";
 
+import { PokemonContext } from "../../PokemonContext/PokemonContext";
+
 const PokemonCatch = (props) => {
+    let pokemonContext = useContext(PokemonContext);
     const { Search } = Input;
 
     let message = {
@@ -143,6 +146,7 @@ const PokemonCatch = (props) => {
 
         pokemons.push(saveObject);
         localStorage.setItem("myPokemon", JSON.stringify(pokemons));
+        pokemonContext.setPokemonsState(pokemons);
         props.setIsCatching(false);
     };
 
@@ -165,6 +169,7 @@ const PokemonCatch = (props) => {
                         enterButton="Enter"
                         size="large"
                         onSearch={onEnter}
+                        maxLength={20}
                     />
                     <span css={errorCss}>{errorMessage}</span>
                 </div>
