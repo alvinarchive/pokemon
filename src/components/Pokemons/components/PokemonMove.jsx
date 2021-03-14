@@ -39,7 +39,7 @@ const PokemonMove = (props) => {
     });
 
     if (loading) {
-        return <div></div>;
+        return "";
     }
 
     let typeCss = {

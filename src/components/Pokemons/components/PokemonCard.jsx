@@ -27,28 +27,51 @@ const PokemonCards = (props) => {
         alignSelf: "center",
     };
 
-    return (
-        <Link
-            to={`/pokemon-detail/${props.pokemon.name}${
-                props.pokemon.nickname ? `/${props.pokemon.nickname}` : ""
-            }`}
-        >
-            <div css={[divCss, hoverCss]}>
-                <img
-                    src={props.pokemon.image}
-                    css={imageCss}
-                    alt="pokemon-img"
-                    width="96px"
-                    height="96px"
-                />
+    let deleteCss = {
+        color: "white",
+        backgroundColor: "#d9534f",
+        margin: "1.5vh",
+        padding: "0.5vh",
+        borderRadius: "8px",
+        transition: "transform .2s",
+    };
 
-                {capitalize(
-                    props.pokemon.nickname
-                        ? props.pokemon.nickname
-                        : props.pokemon.name
-                )}
-            </div>
-        </Link>
+    return (
+        <div>
+            <Link
+                to={`/pokemon-detail/${props.pokemon.name}${
+                    props.pokemon.nickname ? `/${props.pokemon.nickname}` : ""
+                }`}
+            >
+                <div css={[divCss, hoverCss]}>
+                    <img
+                        src={props.pokemon.image}
+                        css={imageCss}
+                        alt="pokemon-img"
+                        width="96px"
+                        height="96px"
+                    />
+
+                    {capitalize(
+                        props.pokemon.nickname
+                            ? props.pokemon.nickname
+                            : props.pokemon.name
+                    )}
+                </div>
+            </Link>
+            {props.pokemon.nickname ? (
+                <div
+                    css={[deleteCss, hoverCss]}
+                    onClick={() => {
+                        props.handleDelete(props.id, props.pokemon.nickname);
+                    }}
+                >
+                    Delete
+                </div>
+            ) : (
+                ""
+            )}
+        </div>
     );
 };
 

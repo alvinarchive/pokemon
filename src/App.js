@@ -7,6 +7,7 @@ import MyPokemon from "./components/Pokemons/MyPokemon";
 import PokemonDetail from "./components/Pokemons/PokemonDetail";
 
 import "./App.css";
+import "antd/dist/antd.min.css";
 
 function App() {
     //graphql apollo

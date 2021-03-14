@@ -6,7 +6,7 @@ import { css, jsx, keyframes } from "@emotion/react";
 import { bounce, shake, fadeIn } from "../../../helper/anim";
 import { mqx } from "../../../helper/functions";
 import { Input } from "antd";
-import "antd/dist/antd.min.css";
+import { v4 as uuid } from "uuid";
 
 const PokemonCatch = (props) => {
     const { Search } = Input;
@@ -122,6 +122,7 @@ const PokemonCatch = (props) => {
             name: props.pokemonData.pokemon.name,
             nickname: value,
             image: props.pokemonData.pokemon.sprites.front_default,
+            id: uuid(),
         };
 
         let pokemons = JSON.parse(localStorage.getItem("myPokemon"));
@@ -168,7 +169,7 @@ const PokemonCatch = (props) => {
                     <span css={errorCss}>{errorMessage}</span>
                 </div>
             ) : (
-                <div></div>
+                ""
             )}
 
             <img css={catchingCss} src="/pokeball.png" />
