@@ -13,10 +13,10 @@ const MenuItem = (props) => {
         padding: "1vh 2vh",
         margin: "2vh 2vh",
         textAlign: "center",
-        listStyleType: "none",
         whiteSpace: "nowrap",
         borderRadius: "8px",
         zIndex: 10,
+        textDecoration: "none",
         transition: "all 0.1s ease-in",
         [mqx[2]]: {
             fontSize: "1.5em",
@@ -29,8 +29,8 @@ const MenuItem = (props) => {
         color: #E4EBE0;
     }`;
 
-    let linkCss = {
-        textDecoration: "none",
+    let liCss = {
+        listStyleType: "none",
     };
 
     if (props.active === props.menu.name) {
@@ -38,9 +38,15 @@ const MenuItem = (props) => {
     }
 
     return (
-        <Link to={props.menu.route} css={linkCss} onClick={() => {}}>
-            <li css={[css, hoverCss]}>{props.menu.name}</li>
-        </Link>
+        <li css={liCss}>
+            <Link
+                to={props.menu.route}
+                css={[css, hoverCss]}
+                onClick={() => {}}
+            >
+                {props.menu.name}
+            </Link>
+        </li>
     );
 };
 
